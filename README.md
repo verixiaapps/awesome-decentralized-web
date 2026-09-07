@@ -24,6 +24,8 @@ Entries marked **Dormant** still work but their source repository has had no act
 
 ## Contents
 
+- [Decentralization at a Glance](#decentralization-at-a-glance)
+- [Choose by Goal](#choose-by-goal)
 - [Protocols and Technologies](#protocols-and-technologies)
   - [Federation & Social Protocols](#federation--social-protocols)
   - [P2P Networking & Data Transfer](#p2p-networking--data-transfer)
@@ -41,35 +43,80 @@ Entries marked **Dormant** still work but their source repository has had no act
   - [Anonymity & Overlay Networks](#anonymity--overlay-networks)
   - [Web, Search and Archiving](#web-search-and-archiving)
   - [Identity & Key Management](#identity--key-management)
-  - [Miscellaneous](#miscellaneous)
 - [Graveyard](#graveyard)
 - [Other Related Lists](#other-related-lists)
 - [Contributors](#contributors)
 
+## Decentralization at a Glance
+A few representative systems — deliberately not all of them — classified on the axes that decide who controls what. Decentralization is not automatically privacy, anonymity, resilience, or censorship resistance: each of those must be designed for separately, and the sibling list awesome-resilient-communication (under *Other Related Lists* below) covers several of them in depth.
+
+|System     |Model                 |User-controlled data|Self-hostable|Offline/LAN|Runs without central relays|Open protocol|Maturity     |
+|-----------|----------------------|--------------------|-------------|-----------|---------------------------|-------------|-------------|
+|Mastodon   |Federated             |◐                   |✓            |✗          |✓                          |✓ ActivityPub|Mature       |
+|Matrix     |Federated             |◐                   |✓            |✗          |◐                          |✓            |Mature       |
+|Bluesky    |Federated, hub-heavy  |◐                   |◐            |✗          |✗                          |✓ AT Protocol|Maturing     |
+|Nostr      |Relay network         |◐                   |✓            |✗          |◐                          |✓            |Maturing     |
+|Delta Chat |Federated (e-mail)    |◐                   |✓            |✗          |◐                          |✓ SMTP/IMAP  |Mature       |
+|Scuttlebutt|P2P, local-first      |✓                   |✓            |✓          |✓                          |✓            |Mature, quiet|
+|IPFS       |P2P, content-addressed|◐                   |✓            |✓          |◐                          |✓            |Mature       |
+|BitTorrent |P2P                   |✓                   |✓            |✓          |◐                          |✓ BEPs       |Mature       |
+|Syncthing  |P2P                   |✓                   |✓            |✓          |◐                          |✓            |Mature       |
+|Radicle    |P2P                   |✓                   |✓            |◐          |◐                          |✓            |Maturing     |
+|Solid      |Federated pods        |✓                   |✓            |✗          |✓                          |✓            |Experimental |
+
+✓ holds by design · ◐ partial or configuration-dependent · ✗ not provided — and in the relay column, ✓ means the system works with no centrally operated helpers at all
+
+The conditional cells, from each project's own documentation:
+
+- Mastodon and Matrix — your data lives on whichever server hosts your account, so full control means self-hosting; Mastodon migration moves followers but not posts, and Matrix replicates room history to every participating homeserver.
+- Matrix relays — nothing in the protocol requires it, but matrix.org remains the default homeserver and identity server for a large share of users.
+- Bluesky — personal data servers are practical to self-host, but Relays and AppViews are resource-intensive, so the network in practice depends on a few operators.
+- Nostr — identity is a client-side keypair, but notes persist only on the relays that accept them; any relay works and clients publish to several at once, yet some relay is always required.
+- Delta Chat — rides on ordinary e-mail, so any provider works, but some provider is always in the loop and sees message metadata.
+- Scuttlebutt — feeds replicate between mutual follows over LAN or the internet; optional pub and room servers only aid discovery.
+- IPFS — content-addressing removes location trust, but content stays retrievable only while some node pins it, and default configurations bootstrap through project-run nodes.
+- BitTorrent and Syncthing — swarms bootstrap through trackers or DHT bootstrap nodes; Syncthing's default discovery and relay servers are project-run but self-hostable, and pure-LAN sync needs neither.
+- Radicle — repositories are local Git; sharing them requires seed nodes your peers can reach.
+- Solid — the specification is stable on paper (protocol 0.9, 2021) but deployments remain small.
+
+## Choose by Goal
+Starting points, not endorsements — the trade-off column is the part to read twice.
+
+|Goal                                      |Starting points                                                                                               |What to keep in mind                                                                                    |
+|------------------------------------------|--------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------|
+|Federated social publishing               |Mastodon or GoToSocial, WriteFreely for blogs, PeerTube for video                                             |You trust your server's operator and moderation; choose the instance as carefully as the software       |
+|Private peer-to-peer messaging            |Briar, Cwtch, SimpleX Chat                                                                                    |P2P is not anonymity by itself; match the tool to a threat model first                                  |
+|Local-first collaborative applications    |Automerge or Yjs, p2panda, Willow                                                                             |These are libraries and protocols, not products — sync topology and auth are still your design work     |
+|Peer-to-peer file transfer and sync       |Syncthing for continuous sync, magic-wormhole for one-shot transfers, WebTorrent in browsers                  |Default discovery and relay servers are project-run; self-host them or stay on LAN for full independence|
+|Decentralized code collaboration          |Radicle, Forgejo for federated forges, Darcs or Pijul as the VCS                                              |Radicle needs reachable seed nodes; ForgeFed federation between forges is still early                   |
+|Content-addressed publishing              |IPFS, Hypercore/Pear, Iroh                                                                                    |Content stays available only while somebody pins or seeds it                                            |
+|Decentralized identity and personal data  |Decentralized Identifiers, Solid, remoteStorage, Keyoxide                                                     |Standards are mature on paper; real-world deployments are small                                         |
+|Censorship-resistant or anonymous services|Tor onion services, I2P, Hyphanet, Ceno Browser                                                               |Anonymity is a property of the network and your own practices, not of decentralization                  |
+|Building a new decentralized application  |libp2p or Iroh for transport, Automerge or Yjs for data, Spritely or Veilid as frameworks, WebXDC inside chats|Decide early what happens when peers are offline — that choice shapes the whole design                  |
 
 ## Protocols and Technologies
 *Protocols, stacks and building blocks for a decentralized web.*
 
 ### Federation & Social Protocols
-- [ActivityPub](https://www.w3.org/TR/activitypub/) - Open, decentralized social networking protocol based on Pump.io's ActivityPump protocol.
-- [AT Protocol](https://github.com/bluesky-social/atproto) - The Authenticated Transfer Protocol, an open protocol for decentralized social networking, powering Bluesky.
-- [ForgeFed](https://github.com/forgefed/forgefed) - A decentralized federation protocol provides a server to server API for pull request, forking and subscription.
-- [Matrix](https://matrix.org/) - An open standard for decentralised persistent communication over IP. Matrix wants to connect together all the various communication services and make them interoperate.
-- [Nostr](https://nostr.com/) - A simple, open protocol that enables censorship-resistant, global social networking.
-- [Scuttlebutt](https://www.scuttlebutt.nz/) - A decent(ralised), offline-friendly secure gossip protocol.
+- [ActivityPub](https://www.w3.org/TR/activitypub/) - W3C Recommendation (2018) for federated social networking, defining server-to-server and client-to-server APIs; the protocol behind most of the Fediverse.
+- [AT Protocol](https://github.com/bluesky-social/atproto) - The Authenticated Transfer Protocol, an open protocol for decentralized social networking with portable identities (DIDs), powering Bluesky; global views of the network rely on resource-intensive Relay and AppView services.
+- [ForgeFed](https://github.com/forgefed/forgefed) - ActivityPub extension for federating software forges: a server-to-server API for pull requests, forks, and subscriptions; implemented experimentally by Forgejo.
+- [Matrix](https://matrix.org/) - Open specification for federated, persistent communication rooms whose history is replicated across every participating homeserver rather than owned by one; bridges connect it to other chat networks.
+- [Nostr](https://nostr.com/) - Minimal protocol in which cryptographically signed notes are published to any number of independent relays; identity is a client-side keypair, and removing content requires every relay carrying it to cooperate.
+- [Scuttlebutt](https://www.scuttlebutt.nz/) - Offline-first gossip protocol that replicates signed append-only feeds between mutual follows over LAN or internet; no servers are required, though optional pub and room servers aid discovery.
 - [XMPP](https://xmpp.org/) - The Extensible Messaging and Presence Protocol, an open IETF standard for federated messaging with thousands of independently operated servers.
 
 ### P2P Networking & Data Transfer
-- [BitTorrent](https://en.wikipedia.org/wiki/BitTorrent) - Protocol for distributed file sharing.
+- [BitTorrent](https://www.bittorrent.org/) - The dominant peer-to-peer file-distribution protocol, specified as open BEPs; swarms find each other through trackers or the Mainline DHT.
 - [cjdns](https://github.com/cjdelisle/cjdns) - Encrypted IPv6 overlay network with distributed hash table routing.
 - [GNUnet](https://gnunet.org/) - A network protocol stack for building secure, distributed, and privacy-preserving applications, with strong roots in academic research.
 - [Hypercore Protocol](https://github.com/holepunchto/hypercore) - A fast, scalable, and secure peer-to-peer protocol for everyone (evolution of the [Dat Protocol](https://datproject.org)), now maintained by [Holepunch](https://holepunch.to/) as part of the Pear runtime.
-- [IPFS](https://ipfs.tech/) - The InterPlanetary File System, a content-addressed, peer-to-peer protocol for storing and sharing data.
+- [IPFS](https://ipfs.tech/) - The InterPlanetary File System, a content-addressed, peer-to-peer protocol for storing and sharing data; content stays retrievable only while some node pins it, and default nodes bootstrap through project-run infrastructure.
 - [IPLD](https://ipld.io/) - A content-addressed linked-data model underlying IPFS and related systems.
 - [Iroh](https://www.iroh.computer/) - A toolkit for direct peer-to-peer connectivity: QUIC hole-punching, content-addressed blobs and document sync.
 - [libp2p](https://libp2p.io/) - A modular peer-to-peer networking stack, the connectivity layer used by IPFS and many other decentralized projects.
 - [Named Data Networking](https://named-data.net/) - A content-centric Internet architecture with active research implementations such as NFD.
-- [WebRTC](https://en.wikipedia.org/wiki/WebRTC) - W3C drafted standard for browser-to-browser data transfer.
+- [WebRTC](https://www.w3.org/TR/webrtc/) - W3C Recommendation (2021, with companion IETF RFCs) for direct browser-to-browser media and data channels; peers still need an application-provided signaling channel and commonly STUN/TURN servers to establish connections.
 - [Yggdrasil](https://yggdrasil-network.github.io/) - An end-to-end encrypted IPv6 overlay network that scales without central coordination.
 
 ### Application Frameworks
@@ -90,16 +137,18 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Yjs](https://yjs.dev/) - A high-performance CRDT for building collaborative, offline-first applications.
 
 ### Mesh & Off-grid Networking
+*Listed here for their who-controls-the-network role; the sibling list awesome-resilient-communication covers off-grid operation in depth.*
+
 - [LibreMesh](https://libremesh.org/) - A modular framework for creating OpenWrt/LEDE-based firmwares for wireless mesh nodes.
 - [Meshtastic](https://meshtastic.org/) - Open-source, off-grid mesh communication over inexpensive LoRa radios; channel encryption defaults to a well-known shared key, with private channels and public-key direct messages available.
 - [Reticulum](https://reticulum.network/) - Cryptography-based networking stack for building resilient networks over almost any medium: LoRa, packet radio, WiFi or TCP/IP. Released under a custom non-OSI license with field-of-use restrictions.
 
 ### Identity & Personal Data
 - [Decentralized Identifiers](https://www.w3.org/TR/did-core/) - W3C standard for globally unique, cryptographically verifiable identifiers that need no central registry.
-- [Decentralized Web Nodes](https://identity.foundation/decentralized-web-node/spec/) - A mesh-like datastore construction that supports sync, built in permissions, and dynamic interactions between other nodes.
+- [Decentralized Web Nodes](https://identity.foundation/decentralized-web-node/spec/) - DIF draft specification for personal datastores that sync between a user's own nodes with built-in permissions. **Dormant** (no repository activity since 2024-09)
 - [Encrypted Data Vaults](https://identity.foundation/edv-spec/) - A privacy-respecting mechanism for storing, indexing, and retrieving encrypted data at a storage provider.
 - [remoteStorage](https://remotestorage.io/) - An open protocol for decoupling data from apps.
-- [Solid](https://solidproject.org/) - A proposed set of conventions and tools for building decentralized social applications based on Linked Data principles.
+- [Solid](https://solidproject.org/) - Specification for personal data pods with app-agnostic access control, based on Linked Data principles; the protocol is stable (0.9, 2021) but real-world deployment remains small.
 
 
 ## Applications
@@ -110,12 +159,12 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Bluesky](https://bsky.app/) - Social network built on the AT Protocol; personal data servers are self-hostable, but in practice the network depends on resource-intensive Relay and AppView services that few parties other than Bluesky operate.
 - [Bonfire](https://bonfirenetworks.org/) - Modular open-source framework and application for building federated digital spaces.
 - [BookWyrm](https://joinbookwyrm.com/) - Federated social reading and book reviews, on ActivityPub.
-- [diaspora*](https://diasporafoundation.org/) - Decentralized and federated social media platform.
-- [Friendica](https://friendi.ca/) - Decentralized and federated social media platform.
+- [diaspora*](https://diasporafoundation.org/) - Federated social network with its own protocol, organized around aspects (contact groups); one of the oldest running Fediverse projects (2010).
+- [Friendica](https://friendi.ca/) - Federated social platform that speaks several protocols at once — ActivityPub, diaspora*, and others — acting as a bridge between networks.
 - [GoToSocial](https://gotosocial.org/) - Lightweight ActivityPub social network server.
-- [Hubzilla](https://hubzilla.org/) - Decentralized and federated social media platform.
+- [Hubzilla](https://hubzilla.org/) - Federated publishing and social platform built on the Zot protocol, whose nomadic identity lets an account and its data move or mirror between servers.
 - [Lemmy](https://join-lemmy.org/) - Federated link aggregator and discussion forum, on ActivityPub.
-- [Manyverse](https://www.manyver.se/) - Mobile client for Secure Scuttlebutt, an offline-first gossip protocol that syncs social feeds over LAN or internet; content can be encrypted, but the social graph and metadata are public by design. **Dormant** (no repository activity since 2024-08)
+- [Manyverse](https://www.manyver.se/) - Mobile client for Secure Scuttlebutt, an offline-first gossip protocol that syncs social feeds over LAN or internet; content can be encrypted, but the social graph and metadata are public by design.
 - [Mastodon](https://joinmastodon.org/) - Decentralized, federated alternative to Twitter.
 - [Mbin](https://joinmbin.org/) - Federated content aggregator and microblogging platform (community fork of /kbin), on ActivityPub.
 - [Misskey](https://misskey-hub.net/) - Feature-rich federated microblogging platform on ActivityPub (Sharkey is a popular fork).
@@ -134,9 +183,9 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [WriteFreely](https://writefreely.org/) - Minimalist federated blogging platform, on ActivityPub.
 
 ### P2P Messaging
-- [Berty](https://github.com/berty/berty) - Anonymous, secure, peer-to-peer protocol that doesn't need an internet connection to function.
-- [BitMessage](https://wiki.bitmessage.org/) - Anonymous encrypted message broadcasting over a peer-to-peer network.
-- [Briar](https://briarproject.org/) - Messenger that syncs over Tor when the internet works and over Bluetooth or Wi-Fi when it does not; relays only between mutual contacts, not strangers. Audited by Cure53 (2017).
+- [Berty](https://github.com/berty/berty) - Peer-to-peer messenger over libp2p with Bluetooth LE and local-network proximity transports, requiring no accounts or servers; still beta software.
+- [BitMessage](https://wiki.bitmessage.org/) - Encrypted message broadcasting in which every node relays every message, hiding who reads what; the network still runs, but the reference client's last release was in 2018.
+- [Briar](https://briarproject.org/) - Messenger that syncs over Tor when the internet works and over Bluetooth or Wi-Fi when it does not; relays only between mutual contacts, not strangers. [Audited by Cure53 (2017)](https://briarproject.org/news/2017-beta-released-security-audit/).
 - [Cwtch](https://cwtch.im/) - Metadata-resistant group messenger built on Tor onion services, with untrusted relay servers for offline delivery.
 - [Delta Chat](https://delta.chat/) - Decentralized messenger with end-to-end encryption that works over the existing e-mail network.
 - [Jami](https://jami.net/) - Distributed peer-to-peer communication (text, voice and video), free and open-source.
@@ -152,19 +201,19 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Radicle](https://radicle.dev/) - Secure peer-to-peer code collaboration without intermediaries.
 
 ### File Storage, Sync and Sharing
-- [instant.io](https://instant.io/) - Streaming file transfer over WebTorrent.
-- [magic-wormhole](https://github.com/magic-wormhole/magic-wormhole) - Get things from one computer to another, safely.
+- [instant.io](https://instant.io/) - Streaming file transfer over WebTorrent, entirely in the browser with nothing to install.
+- [magic-wormhole](https://github.com/magic-wormhole/magic-wormhole) - Transfers files between two computers using short one-time codes over a PAKE-encrypted connection; a public rendezvous server (self-hostable) assists the handshake.
 - [OnionShare](https://onionshare.org/) - Hosts the selected files as a hidden service on the user's computer.
 - [Peergos](https://peergos.org/) - End-to-end encrypted, peer-to-peer file storage, sharing and communication network.
-- [Perkeep](https://perkeep.org/) - Set of open source formats, protocols, and software for modeling, storing, searching, sharing and synchronizing data.
+- [Perkeep](https://perkeep.org/) - Personal, content-addressed storage system designed for lifelong data archiving independent of any provider; development continues at a slow pace.
 - [Syncthing](https://syncthing.net/) - Continuous peer-to-peer file synchronization that works fully on a LAN with no internet; relay and discovery servers are optional and self-hostable.
 - [Tahoe-LAFS](https://github.com/tahoe-lafs/tahoe-lafs) - A private, encrypted file storage system that decentralizes data across multiple servers.
 - [Tribler](https://www.tribler.org) - Privacy enhanced BitTorrent client with P2P content discovery.
 - [WebTorrent](https://webtorrent.io/) - An in-browser torrenting that works without requiring users to install anything extra.
 
 ### Databases
-- [GUN](https://github.com/amark/gun) - A small, easy, and fast data sync and storage system that runs everywhere JavaScript does.
-- [OrbitDB](https://github.com/orbitdb/orbitdb) - Peer-to-peer database engine on top of IPFS.
+- [GUN](https://github.com/amark/gun) - Real-time graph database that syncs between JavaScript peers, in practice through relay "super peers"; conflict resolution is eventually consistent, with optional encryption via its SEA module.
+- [OrbitDB](https://github.com/orbitdb/orbitdb) - Peer-to-peer database engine of append-only, CRDT-merged logs replicated over IPFS pubsub; eventually consistent, with availability depending on which peers are online.
 
 ### Anonymity & Overlay Networks
 - [Hidden Lake](https://github.com/number571/hidden-lake) - Anonymous friend-to-friend network built on queue-based messaging, designed to resist traffic analysis even by a global observer.
@@ -183,10 +232,6 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Dark Crystal](https://darkcrystal.pw/) - Set of protocols, libraries, techniques and guidelines for secure management of sensitive data such as cryptographic keys.
 - [Keyoxide](https://keyoxide.org/) - Decentralized, cryptographic identity proofs; a self-hostable Keybase alternative.
 - [OpenTimestamps](https://opentimestamps.org/) - A standard format for blockchain timestamping.
-
-### Miscellaneous
-- [Librem](https://librem.one) - A growing bundle of ethical services by Purism.
-- [Rotonde](https://wiki.xxiivv.com/#rotonde) - Commonly agreed upon specifications of a JSON object shared between members of the network.
 
 ## Graveyard
 *Projects that shaped the decentralized web but are no longer maintained. Kept for the historical record. Domains of dead projects are sometimes squatted or hijacked — where that happened, links point to archived copies.*
@@ -215,6 +260,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Patchwork](https://github.com/ssbc/patchwork) - A decentralized messaging and sharing app built on top of Secure Scuttlebutt. **Discontinued** (repository archived; successor: Manyverse).
 - [PeerPad](https://peerpad.net) - A realtime P2P collaborative editing tool, powered by IPFS and CRDTs. **Discontinued**
 - [Ricochet](https://ricochet.im/) - Completely anonymous and potentially metadata-free chat **Discontinued**
+- [Rotonde](https://wiki.xxiivv.com/site/rotonde.html) - Decentralized social network defined as a shared JSON specification, whose clients ran over the Dat protocol; it faded when the Dat ecosystem wound down. **Discontinued**
 - [Samizdat](https://web.archive.org/web/2019/http://samizdat.childrenofmay.org/) - A platform for the self-hosted, peer-to-peer, cryptographically-secured internet. **Discontinued**
 - [Shift](https://www.shiftnrg.org) - Decentralized hosting infrastructure for dApps. **Discontinued**
 - [StrongLink](https://github.com/btrask/stronglink) - A searchable, syncable, content-addressable notetaking system **Discontinued**

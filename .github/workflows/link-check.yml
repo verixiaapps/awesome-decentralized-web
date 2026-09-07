@@ -65,12 +65,16 @@ jobs:
         id: pass1
         uses: lycheeverse/lychee-action@v2
         with:
+          # libremesh.org exclusion: site is alive but serves a TLS cert
+          # issued for sysupgrade.libremesh.org (checked 2026-09).
+          # Remove the exclusion once upstream fixes the certificate.
           args: >-
             --no-progress
             --accept '200..=206,429'
             --timeout 60
             --max-retries 3
             --exclude 'web\.archive\.org'
+            --exclude 'libremesh\.org'
             README.md
           format: json
           output: ./lychee/pass1.json

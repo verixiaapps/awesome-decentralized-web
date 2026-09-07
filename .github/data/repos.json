@@ -74,10 +74,9 @@
  },
  "Lemmy": "LemmyNet/lemmy",
  "LibreMesh": "libremesh/lime-packages",
- "Librem": {
-  "exempt": "commercial service bundle; no single repository"
+ "Manyverse": {
+  "exempt": "developed at gitlab.com/staltz/manyverse; the GitHub repository is a stale mirror"
  },
- "Manyverse": "staltz/manyverse",
  "Mastodon": "mastodon/mastodon",
  "Matrix": "matrix-org/matrix-spec",
  "Mbin": "MbinOrg/mbin",
@@ -113,9 +112,6 @@
  },
  "Reticulum": "markqvist/Reticulum",
  "Retroshare": "RetroShare/RetroShare",
- "Rotonde": {
-  "exempt": "a specification; no canonical repository"
- },
  "Scuttlebutt": "ssbc/scuttlebutt-protocol-guide",
  "SimpleX Chat": "simplex-chat/simplex-chat",
  "Socialhome": "jaywink/socialhome",
