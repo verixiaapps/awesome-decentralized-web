@@ -7,7 +7,7 @@ Thanks for helping keep this list useful. Read this before opening a PR — it w
 A project should meet **all** of these:
 
 1. **Decentralization is the core design.** Peer-to-peer, federated, or distributed by architecture — not a centralized product with a "decentralized" feature or marketing angle.
-2. **Open source with a working implementation.** Specs and protocols are welcome if they have at least one real implementation.
+2. **Open source with a working implementation.** Specs and protocols are welcome if they have at least one real implementation. In rare cases a source-available project under non-OSI terms may qualify, but only when its entry explicitly discloses the license restriction.
 3. **Alive or stable.** Meaningful activity (commits, releases, community) within the last 18 months, or mature software that is quiet because it is finished — still working and still used. Projects that go quiet *after* being listed are not removed; they are marked **Dormant** (see the removal policy below).
 4. **Notable.** Any credible signal beyond the project's own marketing: a real community, deployed instances, integrations, independent coverage, public funding, or ~100+ stars. New projects are welcome once they have some track record.
 

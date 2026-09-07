@@ -91,8 +91,8 @@ Entries marked **Dormant** still work but their source repository has had no act
 
 ### Mesh & Off-grid Networking
 - [LibreMesh](https://libremesh.org/) - A modular framework for creating OpenWrt/LEDE-based firmwares for wireless mesh nodes.
-- [Meshtastic](https://meshtastic.org/) - Open-source, off-grid mesh communication over inexpensive LoRa radios.
-- [Reticulum](https://reticulum.network/) - Cryptography-based networking stack for building resilient networks over almost any medium: LoRa, packet radio, WiFi or TCP/IP.
+- [Meshtastic](https://meshtastic.org/) - Open-source, off-grid mesh communication over inexpensive LoRa radios; channel encryption uses shared keys with a well-known default.
+- [Reticulum](https://reticulum.network/) - Cryptography-based networking stack for building resilient networks over almost any medium: LoRa, packet radio, WiFi or TCP/IP. Released under a custom non-OSI license with field-of-use restrictions.
 
 ### Identity & Personal Data
 - [Decentralized Identifiers](https://www.w3.org/TR/did-core/) - W3C standard for globally unique, cryptographically verifiable identifiers that need no central registry.
@@ -107,7 +107,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 
 ### Social Networks (Fediverse & beyond)
 - [Akkoma](https://akkoma.social/) - Fork of Pleroma, a lightweight federated social networking server on ActivityPub.
-- [Bluesky](https://bsky.app/) - Decentralized social network built on the AT Protocol, with self-hostable personal data servers.
+- [Bluesky](https://bsky.app/) - Social network built on the AT Protocol; personal data servers are self-hostable, but in practice the network depends on resource-intensive Relay and AppView services that few parties other than Bluesky operate.
 - [Bonfire](https://bonfirenetworks.org/) - Modular open-source framework and application for building federated digital spaces.
 - [BookWyrm](https://joinbookwyrm.com/) - Federated social reading and book reviews, on ActivityPub.
 - [diaspora*](https://diasporafoundation.org/) - Decentralized and federated social media platform.
@@ -115,7 +115,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [GoToSocial](https://gotosocial.org/) - Lightweight ActivityPub social network server.
 - [Hubzilla](https://hubzilla.org/) - Decentralized and federated social media platform.
 - [Lemmy](https://join-lemmy.org/) - Federated link aggregator and discussion forum, on ActivityPub.
-- [Manyverse](https://www.manyver.se/) - An iOS and Android mobile app for the decentralized messaging and sharing app built on top of Secure Scuttlebutt. **Dormant** (no repository activity since 2024-08)
+- [Manyverse](https://www.manyver.se/) - Mobile client for Secure Scuttlebutt, an offline-first gossip protocol that syncs social feeds over LAN or internet; content can be encrypted, but the social graph and metadata are public by design. **Dormant** (no repository activity since 2024-08)
 - [Mastodon](https://joinmastodon.org/) - Decentralized, federated alternative to Twitter.
 - [Mbin](https://joinmbin.org/) - Federated content aggregator and microblogging platform (community fork of /kbin), on ActivityPub.
 - [Misskey](https://misskey-hub.net/) - Feature-rich federated microblogging platform on ActivityPub (Sharkey is a popular fork).
@@ -136,12 +136,12 @@ Entries marked **Dormant** still work but their source repository has had no act
 ### P2P Messaging
 - [Berty](https://github.com/berty/berty) - Anonymous, secure, peer-to-peer protocol that doesn't need an internet connection to function.
 - [BitMessage](https://wiki.bitmessage.org/) - Anonymous encrypted message broadcasting over a peer-to-peer network.
-- [Briar](https://briarproject.org/) - Peer-to-peer encrypted messaging over Tor, Wi-Fi or Bluetooth, built for activists and journalists.
-- [Cwtch](https://cwtch.im/) - Metadata-resistant, decentralized group messaging built on Tor onion services.
+- [Briar](https://briarproject.org/) - Messenger that syncs over Tor when the internet works and over Bluetooth or Wi-Fi when it does not; relays only between mutual contacts, not strangers. Audited by Cure53 (2017).
+- [Cwtch](https://cwtch.im/) - Metadata-resistant group messenger built on Tor onion services, with untrusted relay servers for offline delivery.
 - [Delta Chat](https://delta.chat/) - Decentralized messenger with end-to-end encryption that works over the existing e-mail network.
 - [Jami](https://jami.net/) - Distributed peer-to-peer communication (text, voice and video), free and open-source.
 - [Retroshare](https://retroshare.cc/) - Establish encrypted connections between you and your friends to create a network of computers, and provides various distributed services: forums, channels, chat, mail.
-- [Ricochet Refresh](https://github.com/blueprint-freespeech/ricochet-refresh) - New updated version of Ricochet.
+- [Ricochet Refresh](https://github.com/blueprint-freespeech/ricochet-refresh) - Maintained fork of Ricochet in which every user is a Tor onion service, leaving no server-side metadata; the original was audited by NCC Group (2016), before the v3 onion migration.
 - [SimpleX Chat](https://simplex.chat/) - Private messenger without any user identifiers, using decentralized relay servers.
 - [Tox](https://tox.chat/) - Serverless peer-to-peer encrypted messaging protocol and implementations (its own documentation notes it has not been independently audited).
 
@@ -157,7 +157,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [OnionShare](https://onionshare.org/) - Hosts the selected files as a hidden service on the user's computer.
 - [Peergos](https://peergos.org/) - End-to-end encrypted, peer-to-peer file storage, sharing and communication network.
 - [Perkeep](https://perkeep.org/) - Set of open source formats, protocols, and software for modeling, storing, searching, sharing and synchronizing data.
-- [Syncthing](https://syncthing.net/) - Continuous peer-to-peer file synchronization between devices, without any central server.
+- [Syncthing](https://syncthing.net/) - Continuous peer-to-peer file synchronization that works fully on a LAN with no internet; relay and discovery servers are optional and self-hostable.
 - [Tahoe-LAFS](https://github.com/tahoe-lafs/tahoe-lafs) - A private, encrypted file storage system that decentralizes data across multiple servers.
 - [Tribler](https://www.tribler.org) - Privacy enhanced BitTorrent client with P2P content discovery.
 - [WebTorrent](https://webtorrent.io/) - An in-browser torrenting that works without requiring users to install anything extra.
@@ -169,8 +169,8 @@ Entries marked **Dormant** still work but their source repository has had no act
 ### Anonymity & Overlay Networks
 - [Hidden Lake](https://github.com/number571/hidden-lake) - Anonymous friend-to-friend network built on queue-based messaging, designed to resist traffic analysis even by a global observer.
 - [Hyphanet](https://www.hyphanet.org/) - Formerly Freenet, a network aimed at activists and people living in repressive regimes (the new [Freenet](https://freenet.org/) is a separate rewrite by the same founder). It uses a web of trust in high security mode, which makes users on the network very difficult to detect.
-- [I2P](https://i2p.net/) - Anonymous network with hidden services.
-- [Tor](https://www.torproject.org/) - Anonymous network proxy.
+- [I2P](https://i2p.net/) - Decentralized garlic-routing overlay for hidden services and peer-to-peer applications; recent academic work documents design weaknesses across its implementations.
+- [Tor](https://www.torproject.org/) - Onion-routing anonymity network, the base for onion services and the pluggable-transport ecosystem; repeatedly audited (most recently Cure53, 2023) with a publicly tracked vulnerability history.
 
 ### Web, Search and Archiving
 - [Agregore](https://agregore.mauve.moe/) - A minimal web browser for the distributed web. Supports IPFS, Hypercore Protocol + more.
@@ -218,7 +218,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 - [Samizdat](https://web.archive.org/web/2019/http://samizdat.childrenofmay.org/) - A platform for the self-hosted, peer-to-peer, cryptographically-secured internet. **Discontinued**
 - [Shift](https://www.shiftnrg.org) - Decentralized hosting infrastructure for dApps. **Discontinued**
 - [StrongLink](https://github.com/btrask/stronglink) - A searchable, syncable, content-addressable notetaking system **Discontinued**
-- [Swarm](https://github.com/ethersphere/swarm) - A distributed storage platform and content distribution service of the Ethereum stack. **Discontinued** (repository archived).
+- [Swarm](https://github.com/ethersphere/swarm) - A distributed storage platform and content distribution service of the Ethereum stack; the original Go implementation was archived, but the project remains active through the [Bee](https://github.com/ethersphere/bee) implementation. **Excluded** (modern Swarm depends on BZZ token economics, out of scope for this list; kept here for the historical record).
 - [Tahrir](https://github.com/sanity/tahrir) - Encrypted, decentralized Twitter-style microblogging built on a web of trust, by Freenet's founder. **Discontinued**
 - [trsst](https://github.com/TrsstProject/trsst) - Encrypted, decentralized Twitter-style microblogging built on syndicated feeds. **Discontinued**
 - [Twister](http://twister.net.co/) - A fully decentralized P2P microblogging platform leveraging the free software implementations of Bitcoin and BitTorrent protocols. **Discontinued**
