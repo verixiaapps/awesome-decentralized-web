@@ -77,7 +77,7 @@ The conditional cells, from each project's own documentation:
 - IPFS — content-addressing removes location trust, but content stays retrievable only while some node pins it, and default configurations bootstrap through project-run nodes.
 - BitTorrent and Syncthing — swarms bootstrap through trackers or DHT bootstrap nodes; Syncthing's default discovery and relay servers are project-run but self-hostable, and pure-LAN sync needs neither.
 - Radicle — repositories are local Git; sharing them requires seed nodes your peers can reach.
-- Solid — the specification is stable on paper (protocol 0.9, 2021) but deployments remain small.
+- Solid — the specification is stable on paper (protocol 0.10) but deployments remain small.
 
 ## Choose by Goal
 Starting points, not endorsements — the trade-off column is the part to read twice.
@@ -148,7 +148,7 @@ Starting points, not endorsements — the trade-off column is the part to read t
 - [Decentralized Web Nodes](https://identity.foundation/decentralized-web-node/spec/) - DIF draft specification for personal datastores that sync between a user's own nodes with built-in permissions. **Dormant** (no repository activity since 2024-09)
 - [Encrypted Data Vaults](https://identity.foundation/edv-spec/) - A privacy-respecting mechanism for storing, indexing, and retrieving encrypted data at a storage provider.
 - [remoteStorage](https://remotestorage.io/) - An open protocol for decoupling data from apps.
-- [Solid](https://solidproject.org/) - Specification for personal data pods with app-agnostic access control, based on Linked Data principles; the protocol is stable (0.9, 2021) but real-world deployment remains small.
+- [Solid](https://solidproject.org/) - Specification for personal data pods with app-agnostic access control, based on Linked Data principles; the published protocol is at version 0.10, but real-world deployment remains small.
 
 
 ## Applications
