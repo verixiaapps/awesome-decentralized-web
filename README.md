@@ -91,7 +91,7 @@ Entries marked **Dormant** still work but their source repository has had no act
 
 ### Mesh & Off-grid Networking
 - [LibreMesh](https://libremesh.org/) - A modular framework for creating OpenWrt/LEDE-based firmwares for wireless mesh nodes.
-- [Meshtastic](https://meshtastic.org/) - Open-source, off-grid mesh communication over inexpensive LoRa radios; channel encryption uses shared keys with a well-known default.
+- [Meshtastic](https://meshtastic.org/) - Open-source, off-grid mesh communication over inexpensive LoRa radios; channel encryption defaults to a well-known shared key, with private channels and public-key direct messages available.
 - [Reticulum](https://reticulum.network/) - Cryptography-based networking stack for building resilient networks over almost any medium: LoRa, packet radio, WiFi or TCP/IP. Released under a custom non-OSI license with field-of-use restrictions.
 
 ### Identity & Personal Data
