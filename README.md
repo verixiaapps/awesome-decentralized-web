@@ -127,6 +127,8 @@ Starting points, not endorsements — the trade-off column is the part to read t
 - [Spritely](https://spritely.institute/) - Distributed object-capability framework (Goblins, OCapN) for building the decentralized social web.
 - [Veilid](https://veilid.com/) - An open-source, peer-to-peer, mobile-first networked application framework with strong privacy, by Cult of the Dead Cow.
 - [WebXDC](https://webxdc.org/) - A specification for portable web apps that run inside chat messages and sync over any transport, with no server of their own.
+- [HostDeFi](https://hostdefi.com) - Agent-ready token-safety scanner with a public A2A agent card, hosted MCP server and x402-paid endpoints for autonomous checks.
+
 
 ### Local-first & CRDTs
 - [Automerge](https://automerge.org/) - A CRDT library for building local-first, collaborative applications that sync without a central server.
